@@ -6,6 +6,9 @@ set(TARGET_LINUX ${TARGET}/linux)
 set(TARGET_GENERIC ${TARGET}/generic)
 set(PUBLIC_HDR_DIR include)
 
+add_definitions(-DLOG_DOMAIN=0xd0d0)
+add_definitions(-DLOG_TAG=\"NativeCore\")
+add_definitions(-DOHOS)
 # ==================================================================================================
 # Sources and headers
 # ==================================================================================================
@@ -111,6 +114,10 @@ if (ANDROID)
     target_link_libraries(${TARGET} PUBLIC log)
     target_link_libraries(${TARGET} PRIVATE dl)
     target_link_libraries(${TARGET} PUBLIC android)
+endif()
+
+if(OHOS)
+    target_include_directories(${TARGET} PUBLIC "C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native/sysroot/usr/include")
 endif()
 
 if (WIN32)

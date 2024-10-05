@@ -20,6 +20,10 @@
 
 #include <utils/compiler.h>
 
+#ifdef OHOS
+#include <hilog/log.h>
+#endif
+
 #ifdef __ANDROID__
 #   include <android/log.h>
 #   ifndef UTILS_LOG_TAG
@@ -51,6 +55,20 @@ private:
     const Priority mPriority;
 };
 
+#ifdef OHOS
+
+LogLevel convertPriorityToLogLevel(utils::io::LogStream::Priority priority) {
+    switch (priority) {
+        case utils::io::LogStream::LOG_DEBUG:    return LOG_DEBUG;
+        case utils::io::LogStream::LOG_ERROR:    return LOG_ERROR;
+        case utils::io::LogStream::LOG_WARNING:  return LOG_WARN;
+        case utils::io::LogStream::LOG_INFO:     return LOG_INFO;
+        case utils::io::LogStream::LOG_VERBOSE:  return LOG_INFO;
+        default:                             return LOG_INFO;
+    }
+}
+#endif
+
 ostream& LogStream::flush() noexcept {
     std::lock_guard const lock(mImpl->mLock);
     Buffer& buf = getBuffer();
@@ -70,6 +88,9 @@ ostream& LogStream::flush() noexcept {
         case LOG_VERBOSE:   prio = ANDROID_LOG_VERBOSE; break;
     }
     __android_log_write(prio, UTILS_LOG_TAG, str);
+#elif defined(OHOS)
+    LogLevel level = convertPriorityToLogLevel(mPriority);
+    OH_LOG_Print(LOG_APP, level, 0xd0d0, "Filament", "%{public}s", str);
 #elif defined(__EMSCRIPTEN__)
     switch (mPriority) {
         case LOG_DEBUG:
