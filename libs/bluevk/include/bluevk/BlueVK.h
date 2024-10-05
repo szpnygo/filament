@@ -38,7 +38,9 @@
     #define VK_NO_PROTOTYPES
     #endif
 
-    #if defined(__ANDROID__)
+    #if defined(OHOS)
+    #define VK_USE_PLATFORM_OHOS_KHR 1
+    #elif defined(__ANDROID__)
     #define VK_USE_PLATFORM_ANDROID_KHR 1
     #elif defined(IOS)
     #define VK_USE_PLATFORM_IOS_MVK 1
@@ -310,12 +312,22 @@ extern PFN_vkGetShaderInfoAMD vkGetShaderInfoAMD;
 extern PFN_vkGetAndroidHardwareBufferPropertiesANDROID vkGetAndroidHardwareBufferPropertiesANDROID;
 extern PFN_vkGetMemoryAndroidHardwareBufferANDROID vkGetMemoryAndroidHardwareBufferANDROID;
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_OHOS_native_buffer)
+extern PFN_vkGetNativeBufferPropertiesOHOS vkGetNativeBufferPropertiesOHOS;
+extern PFN_vkGetMemoryNativeBufferOHOS vkGetMemoryNativeBufferOHOS;
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_ANDROID_native_buffer)
 extern PFN_vkAcquireImageANDROID vkAcquireImageANDROID;
 extern PFN_vkGetSwapchainGrallocUsage2ANDROID vkGetSwapchainGrallocUsage2ANDROID;
 extern PFN_vkGetSwapchainGrallocUsageANDROID vkGetSwapchainGrallocUsageANDROID;
 extern PFN_vkQueueSignalReleaseImageANDROID vkQueueSignalReleaseImageANDROID;
 #endif // defined(VK_ANDROID_native_buffer)
+#if defined(VK_OHOS_native_buffer)
+extern PFN_vkAcquireImageOHOS vkAcquireImageOHOS;
+extern PFN_vkGetSwapchainGrallocUsageOHOS vkGetSwapchainGrallocUsageOHOS;
+extern PFN_vkGetNativeFenceFdOpenHarmony vkGetNativeFenceFdOpenHarmony;
+extern PFN_vkQueueSignalReleaseImageOHOS vkQueueSignalReleaseImageOHOS;
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_EXT_acquire_drm_display)
 extern PFN_vkAcquireDrmDisplayEXT vkAcquireDrmDisplayEXT;
 extern PFN_vkGetDrmDisplayEXT vkGetDrmDisplayEXT;
@@ -539,6 +551,9 @@ extern PFN_vkWriteAccelerationStructuresPropertiesKHR vkWriteAccelerationStructu
 #if defined(VK_KHR_android_surface)
 extern PFN_vkCreateAndroidSurfaceKHR vkCreateAndroidSurfaceKHR;
 #endif // defined(VK_KHR_android_surface)
+#if defined(VK_OHOS_surface)
+extern PFN_vkCreateSurfaceOHOS vkCreateSurfaceOHOS;
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_KHR_bind_memory2)
 extern PFN_vkBindBufferMemory2KHR vkBindBufferMemory2KHR;
 extern PFN_vkBindImageMemory2KHR vkBindImageMemory2KHR;

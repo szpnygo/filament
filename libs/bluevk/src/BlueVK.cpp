@@ -155,6 +155,9 @@ static void loadInstanceFunctions(void* context, PFN_vkVoidFunction (*loadcb)(vo
 #if defined(VK_KHR_android_surface)
     vkCreateAndroidSurfaceKHR = (PFN_vkCreateAndroidSurfaceKHR) loadcb(context, "vkCreateAndroidSurfaceKHR");
 #endif // defined(VK_KHR_android_surface)
+#if defined(VK_OHOS_surface)
+    vkCreateSurfaceOHOS = (PFN_vkCreateSurfaceOHOS) loadcb(context, "vkCreateSurfaceOHOS");
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_KHR_device_group_creation)
     vkEnumeratePhysicalDeviceGroupsKHR = (PFN_vkEnumeratePhysicalDeviceGroupsKHR) loadcb(context, "vkEnumeratePhysicalDeviceGroupsKHR");
 #endif // defined(VK_KHR_device_group_creation)
@@ -471,12 +474,22 @@ static void loadDeviceFunctions(void* context, PFN_vkVoidFunction (*loadcb)(void
     vkGetAndroidHardwareBufferPropertiesANDROID = (PFN_vkGetAndroidHardwareBufferPropertiesANDROID) loadcb(context, "vkGetAndroidHardwareBufferPropertiesANDROID");
     vkGetMemoryAndroidHardwareBufferANDROID = (PFN_vkGetMemoryAndroidHardwareBufferANDROID) loadcb(context, "vkGetMemoryAndroidHardwareBufferANDROID");
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_OHOS_native_buffer)
+    vkGetNativeBufferPropertiesOHOS = (PFN_vkGetNativeBufferPropertiesOHOS) loadcb(context, "vkGetNativeBufferPropertiesOHOS");
+    vkGetMemoryNativeBufferOHOS = (PFN_vkGetMemoryNativeBufferOHOS) loadcb(context, "vkGetMemoryNativeBufferOHOS");
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_ANDROID_native_buffer)
     vkAcquireImageANDROID = (PFN_vkAcquireImageANDROID) loadcb(context, "vkAcquireImageANDROID");
     vkGetSwapchainGrallocUsage2ANDROID = (PFN_vkGetSwapchainGrallocUsage2ANDROID) loadcb(context, "vkGetSwapchainGrallocUsage2ANDROID");
     vkGetSwapchainGrallocUsageANDROID = (PFN_vkGetSwapchainGrallocUsageANDROID) loadcb(context, "vkGetSwapchainGrallocUsageANDROID");
     vkQueueSignalReleaseImageANDROID = (PFN_vkQueueSignalReleaseImageANDROID) loadcb(context, "vkQueueSignalReleaseImageANDROID");
 #endif // defined(VK_ANDROID_native_buffer)
+#if defined(VK_OHOS_native_buffer)
+    vkAcquireImageOHOS = (PFN_vkAcquireImageOHOS) loadcb(context, "vkAcquireImageOHOS");
+    vkGetSwapchainGrallocUsageOHOS = (PFN_vkGetSwapchainGrallocUsageOHOS) loadcb(context, "vkGetSwapchainGrallocUsageOHOS");
+    vkGetNativeFenceFdOpenHarmony = (PFN_vkGetNativeFenceFdOpenHarmony) loadcb(context, "vkGetNativeFenceFdOpenHarmony");
+    vkQueueSignalReleaseImageOHOS = (PFN_vkQueueSignalReleaseImageOHOS) loadcb(context, "vkQueueSignalReleaseImageOHOS");
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_EXT_buffer_device_address)
     vkGetBufferDeviceAddressEXT = (PFN_vkGetBufferDeviceAddressEXT) loadcb(context, "vkGetBufferDeviceAddressEXT");
 #endif // defined(VK_EXT_buffer_device_address)
@@ -1146,12 +1159,22 @@ PFN_vkGetShaderInfoAMD vkGetShaderInfoAMD;
 PFN_vkGetAndroidHardwareBufferPropertiesANDROID vkGetAndroidHardwareBufferPropertiesANDROID;
 PFN_vkGetMemoryAndroidHardwareBufferANDROID vkGetMemoryAndroidHardwareBufferANDROID;
 #endif // defined(VK_ANDROID_external_memory_android_hardware_buffer)
+#if defined(VK_OHOS_native_buffer)
+PFN_vkGetNativeBufferPropertiesOHOS vkGetNativeBufferPropertiesOHOS;
+PFN_vkGetMemoryNativeBufferOHOS vkGetMemoryNativeBufferOHOS;
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_ANDROID_native_buffer)
 PFN_vkAcquireImageANDROID vkAcquireImageANDROID;
 PFN_vkGetSwapchainGrallocUsage2ANDROID vkGetSwapchainGrallocUsage2ANDROID;
 PFN_vkGetSwapchainGrallocUsageANDROID vkGetSwapchainGrallocUsageANDROID;
 PFN_vkQueueSignalReleaseImageANDROID vkQueueSignalReleaseImageANDROID;
 #endif // defined(VK_ANDROID_native_buffer)
+#if defined(VK_OHOS_native_buffer)
+PFN_vkAcquireImageOHOS vkAcquireImageOHOS;
+PFN_vkGetSwapchainGrallocUsageOHOS vkGetSwapchainGrallocUsageOHOS;
+PFN_vkGetNativeFenceFdOpenHarmony vkGetNativeFenceFdOpenHarmony;
+PFN_vkQueueSignalReleaseImageOHOS vkQueueSignalReleaseImageOHOS;
+#endif // defined(VK_OHOS_native_buffer)
 #if defined(VK_EXT_acquire_drm_display)
 PFN_vkAcquireDrmDisplayEXT vkAcquireDrmDisplayEXT;
 PFN_vkGetDrmDisplayEXT vkGetDrmDisplayEXT;
@@ -1375,6 +1398,9 @@ PFN_vkWriteAccelerationStructuresPropertiesKHR vkWriteAccelerationStructuresProp
 #if defined(VK_KHR_android_surface)
 PFN_vkCreateAndroidSurfaceKHR vkCreateAndroidSurfaceKHR;
 #endif // defined(VK_KHR_android_surface)
+#if defined(VK_OHOS_surface)
+PFN_vkCreateSurfaceOHOS vkCreateSurfaceOHOS;
+#endif // defined(VK_OHOS_surface)
 #if defined(VK_KHR_bind_memory2)
 PFN_vkBindBufferMemory2KHR vkBindBufferMemory2KHR;
 PFN_vkBindImageMemory2KHR vkBindImageMemory2KHR;

@@ -10,6 +10,10 @@
 #include "vk_platform.h"
 #include "vulkan_core.h"
 
+#ifdef VK_USE_PLATFORM_OHOS_KHR
+#include "vulkan_ohos.h"
+#endif
+
 #ifdef VK_USE_PLATFORM_ANDROID_KHR
 #include "vulkan_android.h"
 #endif

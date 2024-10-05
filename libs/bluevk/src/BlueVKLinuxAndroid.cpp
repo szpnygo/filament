@@ -39,7 +39,9 @@ bool loadLibrary() {
     // a custom path (common for SwiftShader), or "libvulkan.so" (common for Android).
     if (path == nullptr) {
 #ifdef FILAMENT_VKLIBRARY_PATH
-        path = FILAMENT_VKLIBRARY_PATH;
+      path = FILAMENT_VKLIBRARY_PATH;
+#elif defined(OHOS)
+        path = "libvulkan.so";
 #elif defined(__ANDROID__)
         path = "libvulkan.so";
 #elif defined(__linux__)

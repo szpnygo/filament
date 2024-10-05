@@ -8,12 +8,14 @@ file(GLOB_RECURSE PUBLIC_HDRS ${PUBLIC_HDR_DIR}/${TARGET}/*.h)
 
 set(SRCS src/BlueVK.cpp)
 
+add_definitions(-DOHOS)
+
 # OS specific sources
 if (WIN32)
     set(SRCS ${SRCS} src/BlueVKWindows.cpp)
 elseif (APPLE)
     set(SRCS ${SRCS} src/BlueVKDarwin.cpp)
-elseif (LINUX OR ANDROID)
+elseif (LINUX OR ANDROID OR OHOS)
     set(SRCS ${SRCS} src/BlueVKLinuxAndroid.cpp)
 else()
     message(FATAL_ERROR "Platform not supported. BlueVK supports Linux, Android, MacOS X, and Windows.")

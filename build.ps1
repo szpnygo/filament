@@ -1,0 +1,23 @@
+& "C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\cmake.exe" `
+    -G Ninja `
+    -DCMAKE_TOOLCHAIN_FILE="C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build\cmake\ohos.toolchain.cmake" `
+    -DOHOS_STL=c++_shared `
+    -DOHOS_ARCH=arm64-v8a `
+    -DDIST_ARCH=arm64-v8a `
+    -DOHOS_PLATFORM=OHOS `
+    -DCMAKE_BUILD_TYPE=release `
+    -DFILAMENT_SUPPORTS_OPENGL=OFF `
+    -DFILAMENT_SUPPORTS_METAL=OFF `
+    -DFILAMENT_SUPPORTS_VULKAN=ON `
+    -DFILAMENT_SKIP_SAMPLES=ON `
+    -DFILAMENT_USE_EXTERNAL_GLES3=OFF `
+    -DFILAMENT_SUPPORTS_XCB=OFF `
+    -DFILAMENT_SUPPORTS_XLIB=OFF `
+    -DFILAMENT_SKIP_SDL2=OFF `
+    -DFILAMENT_ENABLE_ASAN_UBSAN=OFF `
+    -DFILAMENT_ENABLE_TSAN=OFF `
+    -DFILAMENT_ENABLE_MULTIVIEW=OFF `
+    -DFILAMENT_SUPPORTS_OSMESA=OFF `
+    -DCMAKE_INSTALL_PREFIX=..\ohos-release\filament `
+    -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON `
+    ..\..
