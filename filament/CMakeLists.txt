@@ -7,6 +7,9 @@ set(GENERATION_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 set(RESOURCE_DIR "${GENERATION_ROOT}/generated/resources")
 set(MATERIAL_DIR "${GENERATION_ROOT}/generated/material")
 
+add_definitions(-DLOG_DOMAIN=0xd0d0)
+add_definitions(-DLOG_TAG=\"NativeCore\")
+add_definitions(-DOHOS)
 # ==================================================================================================
 # Sources and headers
 # ==================================================================================================

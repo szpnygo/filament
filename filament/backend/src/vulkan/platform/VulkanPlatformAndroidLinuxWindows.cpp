@@ -34,7 +34,9 @@
 #endif
 
 // Platform specific includes and defines
-#if defined(__ANDROID__)
+#if defined(OHOS)
+    #include <native_window/external_window.h>
+#elif defined(__ANDROID__)
     #include <android/native_window.h>
 #elif defined(__linux__) && defined(FILAMENT_SUPPORTS_WAYLAND)
     #include <dlfcn.h>
@@ -88,8 +90,9 @@ namespace filament::backend {
 
 VulkanPlatform::ExtensionSet VulkanPlatform::getSwapchainInstanceExtensions() {
     VulkanPlatform::ExtensionSet const ret = {
-#if defined(__ANDROID__)
-        VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
+#if defined(OHOS)
+        VK_OHOS_SURFACE_EXTENSION_NAME,
+#elif defined(__ANDROID__)
 #elif defined(__linux__) && defined(FILAMENT_SUPPORTS_WAYLAND)
         VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME,
 #elif defined(LINUX_OR_FREEBSD) && defined(FILAMENT_SUPPORTS_X11)
@@ -116,7 +119,15 @@ VulkanPlatform::SurfaceBundle VulkanPlatform::createVkSurfaceKHR(void* nativeWin
     // swap chain extent.
     VkExtent2D extent;
 
-    #if defined(__ANDROID__)
+    #if defined(OHOS)
+        VkSurfaceCreateInfoOHOS const createInfo{
+                .sType = VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS,
+                .window = (OHNativeWindow*) nativeWindow,
+        };
+        VkResult const result = vkCreateSurfaceOHOS(
+            instance, &createInfo, VKALLOC, (VkSurfaceKHR *)&surface);
+        FILAMENT_CHECK_POSTCONDITION(result == VK_SUCCESS) << "vkCreateSurfaceOHOS error.";
+    #elif defined(__ANDROID__)
         VkAndroidSurfaceCreateInfoKHR const createInfo{
                 .sType = VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR,
                 .window = (ANativeWindow*) nativeWindow,

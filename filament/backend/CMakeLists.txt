@@ -5,6 +5,9 @@ set(TARGET backend)
 set(PUBLIC_HDR_DIR include)
 set(GENERATION_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
+add_definitions(-DLOG_DOMAIN=0xd0d0)
+add_definitions(-DLOG_TAG=\"NativeCore\")
+add_definitions(-DOHOS)
 # ==================================================================================================
 # Sources and headers
 # ==================================================================================================
@@ -241,7 +244,9 @@ add_library(${TARGET} STATIC ${PRIVATE_HDRS} ${PUBLIC_HDRS} ${SRCS})
 
 # specify where the public headers of this library are
 target_include_directories(${TARGET} PUBLIC ${PUBLIC_HDR_DIR})
-
+if(OHOS)
+    target_include_directories(${TARGET} PUBLIC "C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native/sysroot/usr/include")
+endif()
 # add this subproject to the Filament folder
 set_target_properties(${TARGET} PROPERTIES FOLDER Filament)
 
