@@ -93,6 +93,7 @@ VulkanPlatform::ExtensionSet VulkanPlatform::getSwapchainInstanceExtensions() {
 #if defined(OHOS)
         VK_OHOS_SURFACE_EXTENSION_NAME,
 #elif defined(__ANDROID__)
+        VK_KHR_ANDROID_SURFACE_EXTENSION_NAME,
 #elif defined(__linux__) && defined(FILAMENT_SUPPORTS_WAYLAND)
         VK_KHR_WAYLAND_SURFACE_EXTENSION_NAME,
 #elif defined(LINUX_OR_FREEBSD) && defined(FILAMENT_SUPPORTS_X11)
@@ -119,9 +120,11 @@ VulkanPlatform::SurfaceBundle VulkanPlatform::createVkSurfaceKHR(void* nativeWin
     // swap chain extent.
     VkExtent2D extent;
 
-    #if defined(OHOS)
+#if defined(OHOS)
         VkSurfaceCreateInfoOHOS const createInfo{
                 .sType = VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS,
+                .pNext = nullptr,
+                .flags = 0,
                 .window = (OHNativeWindow*) nativeWindow,
         };
         VkResult const result = vkCreateSurfaceOHOS(
